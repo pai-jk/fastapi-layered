@@ -1,14 +1,10 @@
-from dependency_injector.wiring import Provide, inject
-from fastapi import Depends
+from fastapi import Request
 
-from src.app1.service import App1Service
+from src.app_base.service import AppBaseService
 from webapp.container import ApplicationContainer
 
 
-@inject
-def app1_service_dependency(
-    service: App1Service = Depends(
-        Provide[ApplicationContainer.app1_container.service]
-    ),
-) -> App1Service:
-    return service
+def app_base_service_dependency(request: Request) -> AppBaseService:
+    """AppBaseService 의존성 주입"""
+    container: ApplicationContainer = request.app.container  # type: ignore
+    return container.app_base_container.app_base_service()

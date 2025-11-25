@@ -1,9 +1,7 @@
-from datetime import datetime
-
 from pydantic import BaseModel, ConfigDict, Field
 from pydantic.alias_generators import to_camel
 
-from src.app1.domains import App1
+from src.app_base.domain import HelloAppBaseDomain
 
 
 class CamelModel(BaseModel):
@@ -28,31 +26,14 @@ class ErrorResponseDTO(BaseModel):
     )
 
 
-class RequestDTO(BaseModel):
-    id: int = Field(description="ID", examples=[1])
-    contents: str = Field(
-        description="Contents",
-        examples=["Hello, world!"],
+class HelloAppBaseDTO(CamelModel):
+    message: str = Field(
+        description="Message",
+        examples=["AppBaseService Not Found"],
     )
 
     @staticmethod
-    def from_domain(domain: RequestDomain) -> "RequestDTO":
-        return RequestDTO(
-            id=domain.id,
-            name=domain.content,
-        )
-
-
-class ResponseDTO(CamelModel):
-    id: str = Field(description="ID")
-    contents: str = Field(
-        description="Contents",
-        examples=["Hello, world!"],
-    )
-
-    @staticmethod
-    def from_domain(domain: ResponseDomain) -> "ResponseDTO":
-        return ResponseDTO(
-            id=domain.id,
-            contents=domain.content,
+    def from_domain(domain: HelloAppBaseDomain) -> "HelloAppBaseDTO":
+        return HelloAppBaseDTO(
+            message=domain.message,
         )

@@ -10,7 +10,7 @@ from contextvars import ContextVar
 KST = timezone("Asia/Seoul")
 
 # ContextVar 정의
-request_start_time = ContextVar("request_start_time", default=time.time())
+request_start_time = ContextVar[float]("request_start_time", default=time.time())
 
 
 class JSONFormatter(logging.Formatter):
