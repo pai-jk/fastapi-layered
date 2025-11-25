@@ -1,0 +1,46 @@
+{
+    // Python 인터프리터 설정
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+    // Python 분석기 설정
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.diagnosticMode": "workspace",
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/src"
+    ],
+    // 테스트 설정
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestArgs": [
+        "tests",
+        "-v",
+        "--tb=short"
+    ],
+    "python.testing.autoTestDiscoverOnSaveEnabled": true,
+    "python.testing.cwd": "${workspaceFolder}",
+    "python.testing.promptToConfigure": false,
+    // 테스트 실행 환경 변수
+    "python.testing.pytestPath": "${workspaceFolder}/.venv/bin/pytest",
+    "python.envFile": "${workspaceFolder}/.env",
+    // 테스트 출력 설정 (터미널처럼 보기 좋게)
+    "python.testing.outputConfig": {
+        "openTesting": "neverOpen"
+    },
+    // 코드 포맷팅 및 린팅
+    "python.formatting.provider": "black",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+    // 파일 관련 설정
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/*.pyc": true,
+        "**/.pytest_cache": true
+    },
+    // Python 파일 인코딩
+    "files.encoding": "utf8",
+    // 자동 저장
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000
+}
