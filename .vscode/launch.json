@@ -11,12 +11,12 @@
             "module": "uvicorn",
             "args": [
                 "webapp.app:create_app",
-                "--reload",
                 "--factory",
                 "--host",
                 "0.0.0.0",
                 "--port",
                 "8000",
+                "--reload",
                 "--no-access-log",
                 "--log-level",
                 "debug",
@@ -28,8 +28,7 @@
             "env": {
                 "PYTHONPATH": "${workspaceFolder}/src",
                 "APP_ENV": "dev"
-            },
-            "jinja": true
-        }
+            }
+        },
     ]
 }

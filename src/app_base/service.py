@@ -1,14 +1,16 @@
 import logging
+
 from src.app_base.domain import HelloAppBaseDomain
 from src.app_base.settings import AppBaseSettings
+from src.exceptions import BaseException as AppBaseException
 from src.exceptions import (
-    BaseException as AppBaseException,
     ClientException,
+    DatabaseException,
+    DBIntegrityException,
     ForbiddenException,
     NotFoundException,
     ServerException,
-    DatabaseException,
-    DBIntegrityException,
+    UnknownException,
 )
 
 logger = logging.getLogger(__name__)
@@ -60,28 +62,34 @@ class AppBaseService:
         logger.error(f"DBIntegrityException 발생: {message}", exc_info=True)
         raise DBIntegrityException(message)
 
+    def raise_unknown_exception(
+        self, message: str = "알 수 없는 오류가 발생했습니다"
+    ) -> None:
+        """알 수 없는 오류 발생 샘플"""
+        logger.error(f"UnknownException 발생: {message}", exc_info=True)
+        raise UnknownException(message)
+
     def simulate_error_scenario(self, scenario: str) -> str:
         """다양한 오류 시나리오 시뮬레이션"""
         logger.info(f"오류 시나리오 시뮬레이션 시작: {scenario}")
 
         try:
             if scenario == "client_error":
-                self.raise_client_exception("클라이언트 요청 검증 실패")
+                self.raise_client_exception("TEST:클라이언트 요청 검증 실패")
             elif scenario == "forbidden":
-                self.raise_forbidden_exception("권한이 없습니다")
+                self.raise_forbidden_exception("TEST:권한이 없습니다")
             elif scenario == "not_found":
-                self.raise_not_found_exception("사용자")
+                self.raise_not_found_exception("TEST:사용자")
             elif scenario == "server_error":
-                self.raise_server_exception("서버 처리 중 오류 발생")
+                self.raise_server_exception("TEST:서버 처리 중 오류 발생")
             elif scenario == "database_error":
-                self.raise_database_exception("데이터베이스 연결 실패")
+                self.raise_database_exception("TEST:데이터베이스 연결 실패")
             elif scenario == "integrity_error":
-                self.raise_db_integrity_exception("중복된 키로 인한 정합성 오류")
+                self.raise_db_integrity_exception("TEST:중복된 키로 인한 정합성 오류")
             else:
-                logger.warning(f"알 수 없는 시나리오: {scenario}")
-                return f"알 수 없는 시나리오: {scenario}"
+                self.raise_unknown_exception("TEST:알 수 없는 시나리오")
 
-            return "성공"
+            return "TEST:성공"
         except AppBaseException as e:
-            logger.error(f"시나리오 실행 중 오류 발생: {e.message}", exc_info=True)
-            raise
+            logger.error(f"TEST:시나리오 실행 중 오류 발생: {e.message}", exc_info=True)
+            raise e

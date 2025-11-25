@@ -7,9 +7,12 @@ from starlette.middleware.cors import CORSMiddleware
 
 from src.exceptions import (
     ClientException,
+    DatabaseException,
+    DBIntegrityException,
     ForbiddenException,
     NotFoundException,
     ServerException,
+    UnknownException,
 )
 from webapp.container import ApplicationContainer, create_container
 from webapp.dto import ErrorResponseDTO
@@ -104,7 +107,7 @@ def create_app(container: ApplicationContainer | None = None) -> FastAPI:
 
     @app.exception_handler(ClientException)
     async def client_exception_handler(request: Request, exc: ClientException):
-        logger.error(f"Client exception: {exc}", exc_info=True)
+        # logger.error(f"Client exception: {exc}", exc_info=True)
         return JSONResponse(
             status_code=400,
             content={
@@ -115,7 +118,7 @@ def create_app(container: ApplicationContainer | None = None) -> FastAPI:
 
     @app.exception_handler(ForbiddenException)
     async def forbidden_exception_handler(request: Request, exc: ForbiddenException):
-        logger.error(f"Forbidden exception: {exc}", exc_info=True)
+        # logger.error(f"Forbidden exception: {exc}", exc_info=True)
         return JSONResponse(
             status_code=403,
             content={
@@ -137,7 +140,42 @@ def create_app(container: ApplicationContainer | None = None) -> FastAPI:
 
     @app.exception_handler(ServerException)
     async def server_exception_handler(request: Request, exc: ServerException):
-        logger.error(f"Server exception: {exc}", exc_info=True)
+        # logger.error(f"Server exception: {exc}", exc_info=True)
+        return JSONResponse(
+            status_code=500,
+            content={
+                "message": exc.message,
+                "code": exc.__class__.__name__,
+            },
+        )
+
+    @app.exception_handler(DBIntegrityException)
+    async def db_integrity_exception_handler(
+        request: Request, exc: DBIntegrityException
+    ):
+        logger.error(f"DB integrity exception: {exc}", exc_info=True)
+        return JSONResponse(
+            status_code=400,
+            content={
+                "message": exc.message,
+                "code": exc.__class__.__name__,
+            },
+        )
+
+    @app.exception_handler(DatabaseException)
+    async def database_exception_handler(request: Request, exc: DatabaseException):
+        logger.error(f"Database exception: {exc}", exc_info=True)
+        return JSONResponse(
+            status_code=500,
+            content={
+                "message": exc.message,
+                "code": exc.__class__.__name__,
+            },
+        )
+
+    @app.exception_handler(UnknownException)
+    async def unknown_exception_handler(request: Request, exc: UnknownException):
+        # logger.error(f"Unknown exception: {exc}", exc_info=True)
         return JSONResponse(
             status_code=500,
             content={

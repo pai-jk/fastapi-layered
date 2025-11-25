@@ -4,6 +4,7 @@ class BaseException(Exception):
     message: str = "Base error"
 
     def __init__(self, message: str):
+        super().__init__(message)
         self.message = message
 
 
@@ -41,3 +42,9 @@ class DBIntegrityException(DatabaseException):
     """데이터베이스 정합성 오류"""
 
     message: str = "Database integrity error"
+
+
+class UnknownException(BaseException):
+    """알 수 없는 오류"""
+
+    message: str = "Unknown error"

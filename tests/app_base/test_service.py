@@ -12,6 +12,7 @@ from src.exceptions import (
     ForbiddenException,
     NotFoundException,
     ServerException,
+    UnknownException,
 )
 
 
@@ -437,11 +438,11 @@ class TestAppBaseServiceScenarios:
             mock_logger: Mock된 logger 객체
             app_base_service: AppBaseService 인스턴스 (fixture)
         """
-        result = app_base_service.simulate_error_scenario("unknown")
+        with pytest.raises(UnknownException):
+            app_base_service.simulate_error_scenario("unknown")
 
-        assert result == "알 수 없는 시나리오: unknown"
         mock_logger.info.assert_called_once()
-        mock_logger.warning.assert_called_once()
+        mock_logger.error.call_count == 2
 
 
 class TestAppBaseServiceIntegration:
