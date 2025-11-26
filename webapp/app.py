@@ -16,7 +16,7 @@ from src.exceptions import (
 )
 from webapp.container import ApplicationContainer, create_container
 from webapp.dto import ErrorResponseDTO
-from webapp.routers import app_base, health
+from webapp.routers import app_base, app_db, health
 from webapp.settings import ApplicationSettings
 
 logger = logging.getLogger(__name__)
@@ -50,6 +50,10 @@ def create_app(container: ApplicationContainer | None = None) -> FastAPI:
         if init_result is not None:
             await init_result
 
+        # 데이터베이스 테이블 생성
+        session_factory = app_container.app_db_container.session_factory()  # type: ignore
+        await session_factory.create_database()
+
         try:
             yield
         finally:
@@ -75,6 +79,7 @@ def create_app(container: ApplicationContainer | None = None) -> FastAPI:
 
     app.include_router(health.router, tags=["health"])
     app.include_router(app_base.router, tags=["app-base"])
+    app.include_router(app_db.router, tags=["app-db"])
 
     app.add_middleware(
         CORSMiddleware,

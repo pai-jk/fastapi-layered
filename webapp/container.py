@@ -3,6 +3,7 @@ import logging
 from dependency_injector import containers, providers
 
 from src.app_base.container import AppBaseContainer
+from src.app_db.container import AppDBContainer
 from webapp.logger import initialize_logger
 from webapp.settings import ApplicationSettings
 
@@ -15,6 +16,7 @@ class ApplicationContainer(containers.DeclarativeContainer):
     logger = providers.Resource(initialize_logger)
 
     app_base_container = providers.Container(AppBaseContainer)
+    app_db_container = providers.Container(AppDBContainer)
 
 
 def create_container() -> ApplicationContainer:

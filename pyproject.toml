@@ -17,6 +17,9 @@ dependencies = [
     "opentelemetry-instrumentation (>=0.59b0,<0.60)",
     "opentelemetry-instrumentation-logging (>=0.59b0,<0.60)",
     "asyncpg (>=0.31.0,<0.32.0)",
+    "aiomysql (>=0.3.2,<0.4.0)",
+    "greenlet (>=3.2.4,<4.0.0)",
+    "aiosqlite (>=0.21.0,<0.22.0)",
 ]
 
 [dependency-groups]

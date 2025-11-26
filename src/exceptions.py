@@ -44,6 +44,12 @@ class DBIntegrityException(DatabaseException):
     message: str = "Database integrity error"
 
 
+class AlreadyExistsException(DatabaseException):
+    """데이터베이스 이미 존재하는 오류"""
+
+    message: str = "Database already exists error"
+
+
 class UnknownException(BaseException):
     """알 수 없는 오류"""
 
