@@ -5,7 +5,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from pydantic.alias_generators import to_camel
 
 from src.app_base.domain import HelloAppBaseDomain
-from src.app_db.domain import UserProfile, UserRole
+from src.app_orm_db.domain import UserProfile, UserRole
 
 
 class CamelModel(BaseModel):

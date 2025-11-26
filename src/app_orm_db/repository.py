@@ -1,5 +1,5 @@
-from src.app_db.domain import UserProfile
-from src.app_db.entities import UserEntity
+from src.app_orm_db.domain import UserProfile
+from src.app_orm_db.entities import UserEntity
 from src.database.repository import BaseRepository
 
 

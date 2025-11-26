@@ -4,7 +4,7 @@ from typing import List
 from sqlalchemy import JSON, DateTime
 from sqlalchemy.orm import Mapped, mapped_column
 
-from src.app_db.domain import UserProfile, UserRole
+from src.app_orm_db.domain import UserProfile, UserRole
 from src.database.base import Base
 
 

@@ -1,9 +1,9 @@
 import logging
 from typing import List, Optional
 
-from src.app_db.domain import UserProfile, UserRole
-from src.app_db.repository import UserRepository
-from src.app_db.settings import AppDBSettings
+from src.app_orm_db.domain import UserProfile, UserRole
+from src.app_orm_db.repository import UserRepository
+from src.app_orm_db.settings import AppDBSettings
 
 logger = logging.getLogger(__name__)
 

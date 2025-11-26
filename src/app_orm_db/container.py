@@ -1,8 +1,8 @@
 from dependency_injector import containers, providers
 
-from src.app_db.repository import UserRepository
-from src.app_db.service import AppDBService
-from src.app_db.settings import AppDBSettings
+from src.app_orm_db.repository import UserRepository
+from src.app_orm_db.service import AppDBService
+from src.app_orm_db.settings import AppDBSettings
 from src.database.container import DatabaseContainer
 from src.database.session_factory import SessionFactory
 

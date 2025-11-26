@@ -1,8 +1,8 @@
 """AppDB 라우터"""
 
 from fastapi import APIRouter, Depends
-from src.app_db.service import AppDBService
 
+from src.app_orm_db.service import AppDBService
 from webapp.dependency import app_db_service_dependency
 from webapp.dto import CreateUserDTO, UpdateUserDTO, UserDTO, UserListDTO
 

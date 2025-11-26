@@ -1,7 +1,7 @@
 from fastapi import Request
-
 from src.app_base.service import AppBaseService
-from src.app_db.service import AppDBService
+from src.app_orm_db.service import AppDBService
+
 from webapp.container import ApplicationContainer
 
 

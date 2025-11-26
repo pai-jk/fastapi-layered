@@ -3,7 +3,7 @@ import logging
 from dependency_injector import containers, providers
 
 from src.app_base.container import AppBaseContainer
-from src.app_db.container import AppDBContainer
+from src.app_orm_db.container import AppDBContainer
 from webapp.logger import initialize_logger
 from webapp.settings import ApplicationSettings
 
