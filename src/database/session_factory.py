@@ -42,6 +42,22 @@ class SessionFactory:
                 max_overflow=0,
                 pool_recycle=30 * 60,
             )
+        elif settings.DB_TYPE.startswith("oracle"):
+            url = URL.create(
+                "oracle+oracledb",
+                username=settings.DB_USER,
+                password=settings.DB_PASSWORD,
+                host=settings.DB_HOST,
+                port=settings.DB_PORT,
+                database=settings.DB_NAME,
+            )
+            self._engine = create_async_engine(
+                url,
+                echo=settings.DB_ECHO,
+                pool_size=5,
+                max_overflow=0,
+                pool_recycle=30 * 60,
+            )
         else:
             raise DatabaseException(
                 f"지원하지 않는 database type입니다. {settings.DB_TYPE}"
