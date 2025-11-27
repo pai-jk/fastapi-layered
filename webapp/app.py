@@ -16,7 +16,7 @@ from src.exceptions import (
 )
 from webapp.container import ApplicationContainer, create_container
 from webapp.dto import ErrorResponseDTO
-from webapp.routers import app_base, app_db, health
+from webapp.routers import app_base, app_db, app_query_db, health
 from webapp.settings import ApplicationSettings
 
 logger = logging.getLogger(__name__)
@@ -80,6 +80,7 @@ def create_app(container: ApplicationContainer | None = None) -> FastAPI:
     app.include_router(health.router, tags=["health"])
     app.include_router(app_base.router, tags=["app-base"])
     app.include_router(app_db.router, tags=["app-db"])
+    app.include_router(app_query_db.router, tags=["app-query-db"])
 
     app.add_middleware(
         CORSMiddleware,

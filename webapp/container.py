@@ -4,6 +4,7 @@ from dependency_injector import containers, providers
 
 from src.app_base.container import AppBaseContainer
 from src.app_orm_db.container import AppDBContainer
+from src.app_query_db.container import AppQueryDBContainer
 from webapp.logger import initialize_logger
 from webapp.settings import ApplicationSettings
 
@@ -17,6 +18,7 @@ class ApplicationContainer(containers.DeclarativeContainer):
 
     app_base_container = providers.Container(AppBaseContainer)
     app_db_container = providers.Container(AppDBContainer)
+    app_query_db_container = providers.Container(AppQueryDBContainer)
 
 
 def create_container() -> ApplicationContainer:

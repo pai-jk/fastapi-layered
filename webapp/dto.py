@@ -1,5 +1,5 @@
 from datetime import datetime, timezone
-from typing import List, Optional
+from typing import Any, List, Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 from pydantic.alias_generators import to_camel
@@ -16,6 +16,7 @@ class CamelModel(BaseModel):
 
 class OkDTO(BaseModel):
     ok: bool = Field(default=True)
+    content: Optional[Any] = Field(default=None)
 
 
 class ExistDTO(BaseModel):
