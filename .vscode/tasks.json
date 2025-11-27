@@ -1,0 +1,88 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "pytest: Run All Tests",
+            "type": "shell",
+            "command": "${workspaceFolder}/.venv/bin/pytest",
+            "args": [
+                "tests",
+                "-v",
+                "--tb=short"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "env": {
+                    "PYTHONPATH": "${workspaceFolder}/src"
+                }
+            }
+        },
+        {
+            "label": "pytest: Run Current Test File",
+            "type": "shell",
+            "command": "${workspaceFolder}/.venv/bin/pytest",
+            "args": [
+                "${file}",
+                "-v",
+                "--tb=short"
+            ],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "env": {
+                    "PYTHONPATH": "${workspaceFolder}/src"
+                }
+            }
+        },
+        {
+            "label": "pytest: Run with Coverage",
+            "type": "shell",
+            "command": "${workspaceFolder}/.venv/bin/pytest",
+            "args": [
+                "tests",
+                "-v",
+                "--tb=short",
+                "--cov=src",
+                "--cov-report=term-missing"
+            ],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "env": {
+                    "PYTHONPATH": "${workspaceFolder}/src"
+                }
+            }
+        }
+    ]
+}

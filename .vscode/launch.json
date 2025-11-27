@@ -11,12 +11,12 @@
             "module": "uvicorn",
             "args": [
                 "webapp.app:create_app",
-                "--reload",
                 "--factory",
                 "--host",
                 "0.0.0.0",
                 "--port",
                 "8000",
+                "--reload",
                 "--no-access-log",
                 "--log-level",
                 "debug",
@@ -27,9 +27,16 @@
             "cwd": "${workspaceFolder}",
             "env": {
                 "PYTHONPATH": "${workspaceFolder}/src",
-                "APP_ENV": "dev"
-            },
-            "jinja": true
-        }
+                "APP_ENV": "dev",
+                "DB_TYPE": "sqlite+aiosqlite:///./app_db.db",
+                "DB_NAME": "app_db.db",
+                # SQLite는 host, port, user, password가 필요 없지만 Pydantic 검증을 통과하기 위해 더미 값을 넣어둡니다.
+                "DB_HOST": "localhost",
+                "DB_PORT": "0",
+                "DB_USER": "admin",
+                "DB_PASSWORD": "password",
+                "DB_ECHO": "True"
+            }
+        },
     ]
 }
